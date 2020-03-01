@@ -124,7 +124,7 @@ namespace Unity.Entities
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
         internal ArchetypeChunkBufferDataTypeDynamic(AtomicSafetyHandle safety, AtomicSafetyHandle arrayInvalidationSafety, ComponentType componentType, uint globalSystemVersion)
 #else
-        internal MyCustomContainer(ComponentType componentType, uint globalSystemVersion)
+        internal ArchetypeChunkBufferDataTypeDynamic(ComponentType componentType, uint globalSystemVersion)
 #endif
         {
             m_Length = 1;
@@ -188,7 +188,7 @@ namespace Unity.Entities
                 entityManager.SafetyHandles->GetBufferSafetyHandle(typeIndex),
                 componentType, entityManager.GlobalSystemVersion);
 #else
-            return new ArchetypeChunkBufferTypeDynamic(componentType, GlobalSystemVersion);
+            return new ArchetypeChunkBufferDataTypeDynamic(componentType, entityManager.GlobalSystemVersion);
 #endif
         }
 
