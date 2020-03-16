@@ -603,7 +603,7 @@ namespace Unity.Entities.Tests
 	        job.Schedule(group).Complete();
 	    }
 
-	    struct ReadOnlyJob : IJobChunk
+        struct ReadOnlyJob : IJobChunk
 	    {
 	        [ReadOnly]
 	        public ArchetypeChunkBufferType<EcsIntStateElement> Int;

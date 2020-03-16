@@ -531,10 +531,12 @@ namespace Unity.Entities.Tests
         [AlwaysUpdateSystem]
         public class WriteEcsTestDataSystem : JobComponentSystem
         {
+#pragma warning disable 618
             private struct WriteJob : IJobForEach<EcsTestData>
             {
                 public void Execute(ref EcsTestData c0) {}
             }
+#pragma warning restore 618
 
             protected override JobHandle OnUpdate(JobHandle input)
             {
@@ -790,6 +792,7 @@ namespace Unity.Entities.Tests
         [AlwaysUpdateSystem]
         public class CachedSystemQueryTestSystem : JobComponentSystem
         {
+#pragma warning disable 618
             // Creates implicit query (All = {EcsTestData}, None = {}, Any = {}
             private struct ImplicitQueryCreator : IJobForEach<EcsTestData>
             {
@@ -798,6 +801,7 @@ namespace Unity.Entities.Tests
                     c0.value = 10;
                 }
             }
+#pragma warning restore 618
 
             protected override void OnCreate()
             {
@@ -912,6 +916,50 @@ namespace Unity.Entities.Tests
                     Assert.Throws<ArgumentException>(() => cmd.Playback(m_Manager));
                 }
             }
+        }
+
+        [Test]
+        public void ToComponentDataArrayWithUnrelatedQueryThrows()
+        {
+            var query = EmptySystem.GetEntityQuery(typeof(EcsTestData));
+            
+            JobHandle jobHandle;
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                query.ToComponentDataArrayAsync<EcsTestData2>(Allocator.Persistent, out jobHandle);
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                query.ToComponentDataArray<EcsTestData2>(Allocator.Persistent);
+            });
+#if !UNITY_DISABLE_MANAGED_COMPONENTS
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                query.ToComponentDataArray<EcsTestManagedComponent>();
+            });
+#endif
+        }
+
+        [Test]
+        public void CopyFromComponentDataArrayWithUnrelatedQueryThrows()
+        {
+            var query = EmptySystem.GetEntityQuery(typeof(EcsTestData));
+            
+            JobHandle jobHandle;
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var array = new NativeArray<EcsTestData2>(0, Allocator.Persistent))
+                {
+                    query.CopyFromComponentDataArray<EcsTestData2>(array);
+                }
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                using (var array = new NativeArray<EcsTestData2>(0, Allocator.Persistent))
+                {
+                    query.CopyFromComponentDataArrayAsync<EcsTestData2>(array, out jobHandle);
+                }
+            });
         }
         
         [Test]

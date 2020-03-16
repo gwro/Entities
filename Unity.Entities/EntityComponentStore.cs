@@ -197,11 +197,12 @@ namespace Unity.Entities
             CommandBuffer.Add(dstIndices, count * sizeof(int));
         }
 
-        public void CloneHybridComponentBegin(int* srcIndices, int componentCount, Entity* dstEntities, int instanceCount)
+        public void CloneHybridComponentBegin(int* srcIndices, int componentCount, Entity* dstEntities, int instanceCount, int* dstCompanionLinkIndices)
         {
             CommandBuffer.Add<int>((int)Command.CloneHybridComponents);
             CommandBuffer.AddArray<int>(srcIndices, componentCount);
             CommandBuffer.AddArray<Entity>(dstEntities, instanceCount);
+            CommandBuffer.AddArray<int>(dstCompanionLinkIndices, dstCompanionLinkIndices == null ? 0 : instanceCount);
             CommandBuffer.Add<int>(instanceCount * componentCount);
         }
 
@@ -216,7 +217,7 @@ namespace Unity.Entities
             CommandBuffer.Add<int>((int)Command.FreeManagedComponents);
                         
             CommandBuffer.Add<int>(-1); // this will contain the array count
-            return CommandBuffer.Size - sizeof(int);
+            return CommandBuffer.Length - sizeof(int);
         }
 
         public void AddToFreeManagedComponentCommand(int managedComponentIndex)
@@ -226,10 +227,10 @@ namespace Unity.Entities
         
         public void EndDeallocateManagedComponentCommand(int handle)
         {
-            int count = (CommandBuffer.Size - handle)/sizeof(int) - 1;
+            int count = (CommandBuffer.Length - handle)/sizeof(int) - 1;
             if (count == 0)
             {
-                CommandBuffer.Size -= sizeof(int) * 2;
+                CommandBuffer.Length -= sizeof(int) * 2;
             }
             else
             {
@@ -792,6 +793,50 @@ namespace Unity.Entities
             return ChunkDataUtility.GetComponentDataWithTypeRW(entityChunk, entityIndexInChunk, typeIndex,
                 globalVersion, ref typeLookupCache);
         }
+        
+        public void* GetComponentDataRawRW(Entity entity, int typeIndex)
+        {
+            AssertEntityHasComponent(entity, typeIndex);
+            return GetComponentDataRawRWEntityHasComponent(entity, typeIndex);
+        }
+
+        internal void* GetComponentDataRawRWEntityHasComponent(Entity entity, int typeIndex)
+        {
+#if ENABLE_UNITY_COLLECTIONS_CHECKS
+            if (TypeManager.GetTypeInfo(typeIndex).IsZeroSized)
+                throw new System.ArgumentException(
+                    "GetComponentData() can not be called with a zero sized component.");
+#endif
+
+            var ptr = GetComponentDataWithTypeRW(entity, typeIndex, GlobalSystemVersion);
+            return ptr;
+        }
+        
+        public void SetComponentDataRawEntityHasComponent(Entity entity, int typeIndex, void* data, int size)
+        {
+            AssertEntityHasComponent(entity, typeIndex);
+#if ENABLE_UNITY_COLLECTIONS_CHECKS
+            if (TypeManager.GetTypeInfo(typeIndex).SizeInChunk != size)
+                throw new System.ArgumentException(
+                    "SetComponentData can not be called with a zero sized component and must have same size as sizeof(T).");
+#endif
+
+            var ptr = GetComponentDataWithTypeRW(entity, typeIndex,
+                GlobalSystemVersion);
+            UnsafeUtility.MemCpy(ptr, data, size);
+        }
+        
+        public void SetBufferRawWithValidation(Entity entity, int componentTypeIndex, BufferHeader* tempBuffer, int sizeInChunk)
+        {
+            AssertEntityHasComponent(entity, componentTypeIndex);
+
+            var ptr = GetComponentDataWithTypeRW(entity, componentTypeIndex,
+                GlobalSystemVersion);
+
+            BufferHeader.Destroy((BufferHeader*) ptr);
+
+            UnsafeUtility.MemCpy(ptr, tempBuffer, sizeInChunk);
+        }
 
         public int GetSharedComponentDataIndex(Entity entity, int typeIndex)
         {
@@ -1197,7 +1242,7 @@ namespace Unity.Entities
             return capacity;
         }
 
-        Archetype* CreateArchetype(ComponentTypeInArchetype* types, int count)
+        internal Archetype* CreateArchetype(ComponentTypeInArchetype* types, int count)
         {
             AssertArchetypeComponents(types, count);
 
@@ -1489,16 +1534,18 @@ namespace Unity.Entities
             queries->AddAdditionalArchetypes(changeList);
         }
 
-        public int ManagedComponentIndexUsedCount => m_ManagedComponentIndex - 1 - m_ManagedComponentFreeIndex.Size / 4;
-        public int ManagedComponentFreeCount => m_ManagedComponentIndexCapacity - m_ManagedComponentIndex + m_ManagedComponentFreeIndex.Size / 4;
+        public int ManagedComponentIndexUsedCount => m_ManagedComponentIndex - 1 - m_ManagedComponentFreeIndex.Length / 4;
+        public int ManagedComponentFreeCount => m_ManagedComponentIndexCapacity - m_ManagedComponentIndex + m_ManagedComponentFreeIndex.Length / 4;
 
         [Conditional("ENABLE_UNITY_COLLECTIONS_CHECKS")]
         public void AssertNoQueuedManagedDeferredCommands()
         {
-            Assert.IsTrue(ManagedChangesTracker.Empty);
+            var isEmpty = ManagedChangesTracker.Empty;
+            ManagedChangesTracker.Reset();
+            Assert.IsTrue(isEmpty);
         } 
         
-        void DeallocateManagedComponents(Chunk* chunk, int indexInChunk, int batchCount)
+        public void DeallocateManagedComponents(Chunk* chunk, int indexInChunk, int batchCount)
         {
             var archetype = chunk->Archetype;
             if (archetype->NumManagedComponents == 0)
@@ -1553,17 +1600,17 @@ namespace Unity.Entities
 
         public void AllocateManagedComponentIndices(int* dst, int count)
         {
-            int freeCount = m_ManagedComponentFreeIndex.Size / sizeof(int);
+            int freeCount = m_ManagedComponentFreeIndex.Length / sizeof(int);
             if (freeCount >= count)
             {
                 var newFreeCount = freeCount - count;
                 UnsafeUtility.MemCpy(dst,(int*)m_ManagedComponentFreeIndex.Ptr + newFreeCount, count * sizeof(int));
-                m_ManagedComponentFreeIndex.Size = newFreeCount * sizeof(int);
+                m_ManagedComponentFreeIndex.Length = newFreeCount * sizeof(int);
             }
             else
             {
                 UnsafeUtility.MemCpy(dst,(int*)m_ManagedComponentFreeIndex.Ptr, freeCount * sizeof(int));
-                m_ManagedComponentFreeIndex.Size = 0;
+                m_ManagedComponentFreeIndex.Length = 0;
                 ReserveManagedComponentIndices(count - freeCount);
                 for (int i = freeCount; i < count; ++i)
                     dst[i] = m_ManagedComponentIndex++;
