@@ -153,8 +153,8 @@ namespace Unity.Entities
             var chunk = archetypeChunk.m_Chunk;
             
             var archetype = chunk->Archetype;
-            ChunkDataUtility.GetIndexInTypeArray(chunk->Archetype, chunkComponentType.m_TypeIndex, ref chunkComponentType.m_TypeLookupCache);
-            var typeIndexInArchetype = chunkComponentType.m_TypeLookupCache;
+            int typeIndexInArchetype = chunkComponentType.m_TypeLookupCache;
+            ChunkDataUtility.GetIndexInTypeArray(chunk->Archetype, chunkComponentType.m_TypeIndex, ref typeIndexInArchetype);
             if (typeIndexInArchetype == -1)
             {
                 var emptyResult = NativeArrayUnsafeUtility.ConvertExistingDataToNativeArray<byte>(null, 0, 0);
