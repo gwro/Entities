@@ -187,6 +187,12 @@ namespace Unity.Entities.Tests.ForEachWithStructuralChangesCodegen
             TestSystem.UseEntityIndex_WithStructuralChanges();
         }
 
+        [Test]
+        public void TagComponent_WithStructuralChanges()
+        {
+            TestSystem.TagComponent_WithStructuralChanges();
+        }
+
 #if !UNITY_DISABLE_MANAGED_COMPONENTS
         [Test]
         public void Many_ManagedComponents_WithStructuralChanges()
@@ -453,18 +459,18 @@ namespace Unity.Entities.Tests.ForEachWithStructuralChangesCodegen
                     {
                         EntityManager.DestroyEntity(e);
                         Assert.IsFalse(EntityManager.HasComponent<EcsTestData>(e));
-                        Assert.Throws<ArgumentException>(() => EntityManager.AddComponentData(e, new EcsTestData2(22)));
+                        Assert.Throws<InvalidOperationException>(() => EntityManager.AddComponentData(e, new EcsTestData2(22)));
                         Assert.Throws<ArgumentException>(() => EntityManager.Instantiate(e));
                         Assert.Throws<ArgumentException>(() => EntityManager.SetComponentData(e, new EcsTestData(1)));
                         Assert.IsFalse(EntityManager.HasComponent<EcsTestData>(e));
-                        Assert.Throws<ArgumentException>(() =>
+                        Assert.Throws<InvalidOperationException>(() =>
                             EntityManager.AddSharedComponentData(e, new EcsTestSharedComp(1)));
                         Assert.Throws<ArgumentException>(() => EntityManager.GetSharedComponentData<EcsTestSharedComp>(e));
                         Assert.Throws<ArgumentException>(() =>
                             EntityManager.SetSharedComponentData(e, new EcsTestSharedComp(1)));
                         Assert.IsFalse(EntityManager.HasComponent<EcsTestSharedComp>(e));
 
-                        Assert.Throws<ArgumentException>(() => EntityManager.AddBuffer<EcsIntElement>(e));
+                        Assert.Throws<InvalidOperationException>(() => EntityManager.AddBuffer<EcsIntElement>(e));
                         Assert.IsFalse(EntityManager.HasComponent<EcsIntElement>(e));
                         Assert.Throws<ArgumentException>(() => EntityManager.Instantiate(e));
                         EntityManager.RemoveComponent<EcsIntElement>(e);
@@ -666,6 +672,21 @@ namespace Unity.Entities.Tests.ForEachWithStructuralChangesCodegen
                     etd.value = entityInQueryIndex + 1234;
                     EntityManager.CreateEntity(archA);
                 }).Run();
+                
+                Assert.AreEqual(1234, EntityManager.GetComponentData<EcsTestData>(newEntity).value);
+            }
+            
+            public void TagComponent_WithStructuralChanges()
+            {
+                var archA = EntityManager.CreateArchetype(typeof(EcsTestTag));
+                var newEntity = EntityManager.CreateEntity(archA);
+
+                Entities
+                    .WithStructuralChanges()
+                    .ForEach((Entity entity, in EcsTestTag tag) =>
+                    {
+                        EntityManager.AddComponentData(entity, new EcsTestData(1234));
+                    }).Run();
                 
                 Assert.AreEqual(1234, EntityManager.GetComponentData<EcsTestData>(newEntity).value);
             }

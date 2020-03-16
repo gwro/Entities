@@ -20,18 +20,21 @@ using System;
 namespace Unity.Entities
 {
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_C<,>))]
     public interface IJobForEach<T0> : IJobForEach_C<T0>
 		where T0 : struct, IComponentData
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EC<,>))]
     public interface IJobForEachWithEntity<T0> : IJobForEachWithEntity_EC<T0>
 		where T0 : struct, IComponentData
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CC<,,>))]
     public interface IJobForEach<T0, T1> : IJobForEach_CC<T0, T1>
 		where T0 : struct, IComponentData
@@ -39,6 +42,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECC<,,>))]
     public interface IJobForEachWithEntity<T0, T1> : IJobForEachWithEntity_ECC<T0, T1>
 		where T0 : struct, IComponentData
@@ -46,6 +50,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCC<,,,>))]
     public interface IJobForEach<T0, T1, T2> : IJobForEach_CCC<T0, T1, T2>
 		where T0 : struct, IComponentData
@@ -54,6 +59,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCC<,,,>))]
     public interface IJobForEachWithEntity<T0, T1, T2> : IJobForEachWithEntity_ECCC<T0, T1, T2>
 		where T0 : struct, IComponentData
@@ -62,6 +68,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCCC<,,,,>))]
     public interface IJobForEach<T0, T1, T2, T3> : IJobForEach_CCCC<T0, T1, T2, T3>
 		where T0 : struct, IComponentData
@@ -71,6 +78,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCCC<,,,,>))]
     public interface IJobForEachWithEntity<T0, T1, T2, T3> : IJobForEachWithEntity_ECCCC<T0, T1, T2, T3>
 		where T0 : struct, IComponentData
@@ -80,6 +88,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCCCC<,,,,,>))]
     public interface IJobForEach<T0, T1, T2, T3, T4> : IJobForEach_CCCCC<T0, T1, T2, T3, T4>
 		where T0 : struct, IComponentData
@@ -90,6 +99,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCCCC<,,,,,>))]
     public interface IJobForEachWithEntity<T0, T1, T2, T3, T4> : IJobForEachWithEntity_ECCCCC<T0, T1, T2, T3, T4>
 		where T0 : struct, IComponentData
@@ -100,6 +110,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCCCCC<,,,,,,>))]
     public interface IJobForEach<T0, T1, T2, T3, T4, T5> : IJobForEach_CCCCCC<T0, T1, T2, T3, T4, T5>
 		where T0 : struct, IComponentData
@@ -111,6 +122,7 @@ namespace Unity.Entities
 	{}
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCCCCC<,,,,,,>))]
     public interface IJobForEachWithEntity<T0, T1, T2, T3, T4, T5> : IJobForEachWithEntity_ECCCCCC<T0, T1, T2, T3, T4, T5>
 		where T0 : struct, IComponentData
@@ -123,6 +135,7 @@ namespace Unity.Entities
 
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_C<,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_C<>))]
@@ -134,6 +147,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EC<,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EC<>))]
@@ -145,6 +159,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_B<,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_B<>))]
@@ -156,6 +171,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EB<,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EB<>))]
@@ -167,6 +183,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CC<,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_CC<>))]
@@ -179,6 +196,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECC<,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_ECC<>))]
@@ -191,6 +209,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BC<,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BC<>))]
@@ -203,6 +222,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBC<,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBC<>))]
@@ -215,6 +235,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BB<,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BB<>))]
@@ -227,6 +248,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBB<,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBB<>))]
@@ -239,6 +261,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCC<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_CCC<>))]
@@ -252,6 +275,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCC<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_ECCC<>))]
@@ -265,6 +289,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BCC<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BCC<>))]
@@ -278,6 +303,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBCC<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBCC<>))]
@@ -291,6 +317,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBC<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBC<>))]
@@ -304,6 +331,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBC<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBC<>))]
@@ -317,6 +345,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBB<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBB<>))]
@@ -330,6 +359,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBB<,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBB<>))]
@@ -343,6 +373,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCCC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_CCCC<>))]
@@ -357,6 +388,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCCC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_ECCCC<>))]
@@ -371,6 +403,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BCCC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BCCC<>))]
@@ -385,6 +418,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBCCC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBCCC<>))]
@@ -399,6 +433,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBCC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBCC<>))]
@@ -413,6 +448,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBCC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBCC<>))]
@@ -427,6 +463,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBC<>))]
@@ -441,6 +478,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBC<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBC<>))]
@@ -455,6 +493,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBB<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBB<>))]
@@ -469,6 +508,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBB<,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBB<>))]
@@ -483,6 +523,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCCCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_CCCCC<>))]
@@ -498,6 +539,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCCCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_ECCCCC<>))]
@@ -513,6 +555,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BCCCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BCCCC<>))]
@@ -528,6 +571,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBCCCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBCCCC<>))]
@@ -543,6 +587,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBCCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBCCC<>))]
@@ -558,6 +603,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBCCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBCCC<>))]
@@ -573,6 +619,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBCC<>))]
@@ -588,6 +635,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBCC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBCC<>))]
@@ -603,6 +651,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBBC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBBC<>))]
@@ -618,6 +667,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBBC<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBBC<>))]
@@ -633,6 +683,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBBB<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBBB<>))]
@@ -648,6 +699,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBBB<,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBBB<>))]
@@ -663,6 +715,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_CCCCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_CCCCCC<>))]
@@ -679,6 +732,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_ECCCCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_ECCCCCC<>))]
@@ -695,6 +749,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BCCCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BCCCCC<>))]
@@ -711,6 +766,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBCCCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBCCCCC<>))]
@@ -727,6 +783,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBCCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBCCCC<>))]
@@ -743,6 +800,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBCCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBCCCC<>))]
@@ -759,6 +817,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBCCC<>))]
@@ -775,6 +834,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBCCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBCCC<>))]
@@ -791,6 +851,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBBCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBBCC<>))]
@@ -807,6 +868,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBBCC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBBCC<>))]
@@ -823,6 +885,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBBBC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBBBC<>))]
@@ -839,6 +902,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBBBC<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBBBC<>))]
@@ -855,6 +919,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_BBBBBB<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_BBBBBB<>))]
@@ -871,6 +936,7 @@ namespace Unity.Entities
     }
 
 
+    [Obsolete("Please use Entities.ForEach or IJobChunk to schedule jobs that work on Entities. (RemovedAfter 2020-06-20)")]
     [JobProducerType(typeof(JobForEachExtensions.JobStruct_Process_EBBBBBB<,,,,,,>))]
     #if UNITY_DOTSPLAYER
     [JobInferredType(typeof(JobForEachExtensions.JobStruct_ProcessInfer_EBBBBBB<>))]
@@ -3210,6 +3276,7 @@ namespace Unity.Entities
         }
 #endif // UNITY_DOTSPLAYER
 
+#pragma warning disable 618
         internal static unsafe JobHandle ScheduleInternal_C<T>(ref T jobData, ComponentSystemBase system, EntityQuery query, int innerloopBatchCount, JobHandle dependsOn, ScheduleMode mode)
             where T : struct
 #if UNITY_DOTSPLAYER
@@ -3231,7 +3298,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_C<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_C<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_C<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_C<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -3340,7 +3407,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -3450,7 +3517,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_B<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_B<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_B<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_B<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -3569,7 +3636,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -3689,7 +3756,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_CC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_CC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -3802,7 +3869,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_ECC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_ECC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -3916,7 +3983,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4039,7 +4106,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4163,7 +4230,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4288,7 +4355,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4414,7 +4481,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_CCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_CCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4531,7 +4598,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_ECCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_ECCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4649,7 +4716,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4776,7 +4843,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -4904,7 +4971,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5033,7 +5100,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5163,7 +5230,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5294,7 +5361,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5426,7 +5493,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_CCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_CCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5547,7 +5614,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_ECCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_ECCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5669,7 +5736,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5800,7 +5867,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -5932,7 +5999,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6065,7 +6132,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6199,7 +6266,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6334,7 +6401,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6470,7 +6537,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6607,7 +6674,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6745,7 +6812,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_CCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_CCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6870,7 +6937,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_ECCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_ECCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -6996,7 +7063,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7131,7 +7198,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7267,7 +7334,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7404,7 +7471,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7542,7 +7609,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7681,7 +7748,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7821,7 +7888,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -7962,7 +8029,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8104,7 +8171,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8247,7 +8314,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8391,7 +8458,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_CCCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_CCCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_CCCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8520,7 +8587,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_ECCCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_ECCCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_ECCCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8650,7 +8717,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BCCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BCCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BCCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8789,7 +8856,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBCCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBCCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBCCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -8929,7 +8996,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9070,7 +9137,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBCCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBCCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBCCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBCCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9212,7 +9279,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9355,7 +9422,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBCCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBCCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBCCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBCCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9499,7 +9566,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9644,7 +9711,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBBCC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBCC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBCC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBBCC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9790,7 +9857,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -9937,7 +10004,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBBBC<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBBC<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBBC<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBBBC<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -10085,7 +10152,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_BBBBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_BBBBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_BBBBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -10234,7 +10301,7 @@ namespace Unity.Entities
             var resolvedQuery = JobStruct_ProcessInfer_EBBBBBB<T>.Cache.EntityQuery;
             var prefilterHandle = ChunkIterationUtility.PreparePrefilteredChunkLists(unfilteredChunkCount, resolvedQuery._QueryData->MatchingArchetypes, resolvedQuery._Filter, dependsOn, mode, out fullData.PrefilterData, out var deferredCountData);
 #if UNITY_DOTSPLAYER
-            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBBB<T>.Cache.JobReflectionData, dependsOn, mode);
+            var scheduleParams = new JobsUtility.JobScheduleParameters(UnsafeUtility.AddressOf(ref fullData), JobStruct_ProcessInfer_EBBBBBB<T>.Cache.JobReflectionData, prefilterHandle, mode);
             return JobsUtility.Schedule(ref scheduleParams);
 #else
             return Schedule(UnsafeUtility.AddressOf(ref fullData), fullData.PrefilterData, fullData.Iterator.m_Length, innerloopBatchCount, isParallelFor, resolvedQuery.HasFilter(), ref JobStruct_ProcessInfer_EBBBBBB<T>.Cache, deferredCountData, prefilterHandle, mode);
@@ -10363,7 +10430,7 @@ namespace Unity.Entities
                 }
             }
         }
-
     }
 }
+#pragma warning restore 618
 
