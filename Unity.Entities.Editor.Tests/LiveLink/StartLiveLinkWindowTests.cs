@@ -1,16 +1,18 @@
+using NUnit.Framework;
 using System;
 using System.IO;
-using NUnit.Framework;
 using Unity.Build;
 using Unity.Build.Classic;
+using Unity.Build.Classic.Private;
 using Unity.Build.Common;
+using Unity.BuildSystem.NativeProgramSupport;
+using Unity.Scenes.Editor.Build;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace Unity.Entities.Editor.Tests
 {
-    
     [TestFixture]
     class StartLiveLinkWindowTests
     {
@@ -85,26 +87,15 @@ namespace Unity.Entities.Editor.Tests
             Assert.That(listView.itemsSource.Count, Is.EqualTo(2));
         }
 
-#if !UNITY_BUILD_CLASS_BASED_PIPELINES
         [Test]
         public void ConfigurationViewModel_DetectWhenNotLiveLinkCompatible()
         {
-            var liveLinkPipeline = Build.BuildPipeline.LoadAsset(StartLiveLinkWindow.kDefaultLiveLinkBuildPipelineAssetPath);
-            var liveLinkMetaPipeline = Build.BuildPipeline.LoadAsset(StartLiveLinkWindow.kWinLiveLinkBuildPipelineAssetPath);
-            var nonLiveLinkPipeline = Build.BuildPipeline.LoadAsset("Packages/com.unity.entities/Unity.Entities.Hybrid/Assets/Hybrid.buildpipeline");
             var liveLink = new StartLiveLinkWindow.BuildConfigurationViewModel(CreateBuildConfiguration("LiveLink", configuration =>
             {
                 configuration.SetComponent(new GeneralSettings());
+                configuration.SetComponent(new LiveLink());
                 configuration.SetComponent(new SceneList { BuildCurrentScene = true });
-                configuration.SetComponent(new ClassicBuildProfile { Pipeline = liveLinkPipeline, Target = BuildTarget.Android });
-                configuration.SetComponent(new OutputBuildDirectory { OutputDirectory = "Builds" });
-                configuration.SetComponent(new ClassicScriptingSettings());
-            }));
-            var metaLiveLink = new StartLiveLinkWindow.BuildConfigurationViewModel(CreateBuildConfiguration("LiveLink", configuration =>
-            {
-                configuration.SetComponent(new GeneralSettings());
-                configuration.SetComponent(new SceneList { BuildCurrentScene = true });
-                configuration.SetComponent(new ClassicBuildProfile { Pipeline = liveLinkMetaPipeline, Target = BuildTarget.Android });
+                configuration.SetComponent(new ClassicBuildProfile { Platform = Platform.Windows });
                 configuration.SetComponent(new OutputBuildDirectory { OutputDirectory = "Builds" });
                 configuration.SetComponent(new ClassicScriptingSettings());
             }));
@@ -112,14 +103,22 @@ namespace Unity.Entities.Editor.Tests
             {
                 configuration.SetComponent(new GeneralSettings());
                 configuration.SetComponent(new SceneList { BuildCurrentScene = true });
-                configuration.SetComponent(new ClassicBuildProfile { Pipeline = nonLiveLinkPipeline, Target = BuildTarget.Android });
+                configuration.SetComponent(new ClassicBuildProfile { Platform = Platform.Windows });
+                configuration.SetComponent(new OutputBuildDirectory { OutputDirectory = "Builds" });
+                configuration.SetComponent(new ClassicScriptingSettings());
+            }));
+            var noProfile = new StartLiveLinkWindow.BuildConfigurationViewModel(CreateBuildConfiguration("NonLiveLink", configuration =>
+            {
+                configuration.SetComponent(new GeneralSettings());
+                configuration.SetComponent(new LiveLink());
+                configuration.SetComponent(new SceneList { BuildCurrentScene = true });
                 configuration.SetComponent(new OutputBuildDirectory { OutputDirectory = "Builds" });
                 configuration.SetComponent(new ClassicScriptingSettings());
             }));
 
             Assert.That(liveLink.IsLiveLinkCompatible, Is.True);
-            Assert.That(metaLiveLink.IsLiveLinkCompatible, Is.True);
             Assert.That(nonLiveLink.IsLiveLinkCompatible, Is.False);
+            Assert.That(noProfile.IsLiveLinkCompatible, Is.False);
         }
 
         [Test]
@@ -129,7 +128,7 @@ namespace Unity.Entities.Editor.Tests
             {
                 configuration.SetComponent(new GeneralSettings());
                 configuration.SetComponent(new SceneList { BuildCurrentScene = true });
-                configuration.SetComponent(new ClassicBuildProfile { Pipeline = Build.BuildPipeline.LoadAsset(StartLiveLinkWindow.kDefaultLiveLinkBuildPipelineAssetPath), Target = BuildTarget.Android });
+                configuration.SetComponent(new ClassicBuildProfile { Platform = Platform.Windows });
                 configuration.SetComponent(new OutputBuildDirectory { OutputDirectory = "TestConfigurationBuilds" });
                 configuration.SetComponent(new ClassicScriptingSettings());
             }));
@@ -149,12 +148,24 @@ namespace Unity.Entities.Editor.Tests
             Assert.That(viewModel.IsActionAllowed(StartLiveLinkWindow.StartMode.BuildAndRun, out _), Is.False);
             Assert.That(viewModel.IsActionAllowed(StartLiveLinkWindow.StartMode.RunLatestBuild, out _), Is.False);
         }
-#endif
-        
+
         string CreateBuildConfiguration(string assetName = "TestConfiguration", Action<BuildConfiguration> mutator = null)
         {
             var cfg = BuildConfiguration.CreateAsset(Path.Combine(m_TestDirectoryPath, assetName + BuildConfiguration.AssetExtension), mutator);
             return AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(cfg));
+        }
+
+        // This class is not directly referenced, but it is instanciated nonetheless.
+        // It's used when running tests, to compensate for missing platform packages.
+        class MockClassicNonIncrementalPipeline : ClassicNonIncrementalPipelineBase
+        {
+            protected override RunResult OnRun(RunContext context)
+            {
+                throw new NotImplementedException();
+            }
+
+            protected override BuildTarget BuildTarget { get; } = BuildTarget.StandaloneWindows;
+            public override Platform Platform { get; } = Platform.Windows;
         }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Unity.Entities;
 using UnityEngine;
 using Hash128 = Unity.Entities.Hash128;
 
@@ -11,7 +10,7 @@ namespace Unity.Scenes
     class EntityScenesPaths
     {
         public static Type SubSceneImporterType = null;
-        
+
         public enum PathType
         {
             EntitiesUnityObjectReferences,
@@ -29,27 +28,27 @@ namespace Unity.Scenes
                 // these must all be lowercase
                 case PathType.EntitiesUnityObjectReferences: return "asset";
                 case PathType.EntitiesUnityObjectRefGuids: return "refguids";
-                case PathType.EntitiesBinary : return "entities";
+                case PathType.EntitiesBinary: return "entities";
                 case PathType.EntitiesUnitObjectReferencesBundle: return "bundle";
-                case PathType.EntitiesHeader : return "entityheader";
-                case PathType.EntitiesConversionLog : return "conversionlog";
+                case PathType.EntitiesHeader: return "entityheader";
+                case PathType.EntitiesConversionLog: return "conversionlog";
             }
 
             throw new System.ArgumentException("Unknown PathType");
         }
-        
+
 #if UNITY_EDITOR
 
         static Dictionary<Hash128, string> s_HashToString = new Dictionary<Hash128, string>();
 
-        public static Hash128 GetSubSceneArtifactHash(Hash128 sceneGUID, Hash128 buildConfigurationGUID, UnityEditor.Experimental.AssetDatabaseExperimental.ImportSyncMode syncMode)
+        public static Hash128 GetSubSceneArtifactHash(Hash128 sceneGUID, Hash128 buildConfigurationGUID, ImportMode importMode)
         {
             var guid = SceneWithBuildConfigurationGUIDs.EnsureExistsFor(sceneGUID, buildConfigurationGUID);
             if (!s_HashToString.TryGetValue(guid, out var guidString))
                 guidString = s_HashToString[guid] = guid.ToString();
-            return UnityEditor.Experimental.AssetDatabaseExperimental.GetArtifactHash(guidString, SubSceneImporterType, syncMode);
-        }        
-        
+            return AssetDatabaseCompatibility.GetArtifactHash(guidString, SubSceneImporterType, importMode);
+        }
+
         public static string GetLoadPathFromArtifactPaths(string[] paths, PathType type, int? sectionIndex = null)
         {
             var extension = GetExtension(type);
@@ -58,11 +57,12 @@ namespace Unity.Scenes
 
             return paths.FirstOrDefault(p => p.EndsWith(extension));
         }
+
 #endif // UNITY_EDITOR
 
         public static string GetLoadPath(Hash128 sceneGUID, PathType type, int sectionIndex)
         {
-            return Application.streamingAssetsPath+"/"+RelativePathInStreamingAssetsFolderFor(sceneGUID,type,sectionIndex);
+            return Application.streamingAssetsPath + "/" + RelativePathInStreamingAssetsFolderFor(sceneGUID, type, sectionIndex);
         }
 
         public static string RelativePathInStreamingAssetsFolderFor(Hash128 sceneGUID, PathType type, int sectionIndex)
@@ -80,7 +80,7 @@ namespace Unity.Scenes
                     throw new ArgumentException();
             }
         }
-        
+
         public static string GetLiveLinkCachePath(UnityEngine.Hash128 targetHash, PathType type, int sectionIndex)
         {
             var extension = GetExtension(type);

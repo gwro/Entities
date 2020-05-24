@@ -5,20 +5,20 @@ using System.IO;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Entities.Serialization;
-using Unity.IO.LowLevel.Unsafe;
-using Unity.Scenes;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 using Hash128 = Unity.Entities.Hash128;
 
 namespace Unity.Scenes
 {
-    struct ResolvedSectionEntity : ISystemStateBufferElementData
+    public struct ResolvedSectionEntity : ISystemStateBufferElementData
     {
         public Entity SectionEntity;
     }
 
+    struct SceneEntityReference : IComponentData
+    {
+        public Entity SceneEntity;
+    }
     struct ResolvedSceneHash : IComponentData
     {
         public Hash128 ArtifactHash;
@@ -30,13 +30,20 @@ namespace Unity.Scenes
         public Words HybridPath;
     }
 
+    struct SceneSectionCustomMetadata
+    {
+        public ulong StableTypeHash;
+        public BlobArray<byte> Data;
+    }
+
     struct SceneMetaData
     {
         public BlobArray<SceneSectionData> Sections;
         public BlobString                  SceneName;
+        public BlobArray<BlobArray<SceneSectionCustomMetadata>> SceneSectionCustomMetadata;
     }
 
-    internal struct DisableSceneResolveAndLoad : IComponentData
+    public struct DisableSceneResolveAndLoad : IComponentData
     {
     }
 
@@ -81,7 +88,7 @@ namespace Unity.Scenes
             Entities.With(m_ResolvedScenes).ForEach((Entity sceneEntity, ref SceneReference scene, ref ResolvedSceneHash resolvedScene) =>
             {
                 LogResolving("Queuing UpdateSceneContentsChanged", scene.SceneGUID);
-                var hash = EntityScenesPaths.GetSubSceneArtifactHash(scene.SceneGUID, buildConfigurationGUID, UnityEditor.Experimental.AssetDatabaseExperimental.ImportSyncMode.Queue);
+                var hash = EntityScenesPaths.GetSubSceneArtifactHash(scene.SceneGUID, buildConfigurationGUID, ImportMode.Asynchronous);
                 if ((hash != default) && (hash != resolvedScene.ArtifactHash))
                 {
                     LogResolving("Scene hash changed", scene.SceneGUID);
@@ -111,106 +118,13 @@ namespace Unity.Scenes
 
         void ResolveScene(Entity sceneEntity, ref SceneReference scene, RequestSceneLoaded requestSceneLoaded, Hash128 artifactHash)
         {
-            // Resolve first (Even if the file doesn't exist we want to stop continously trying to load the section)
-            EntityManager.AddBuffer<ResolvedSectionEntity>(sceneEntity);
-
-#if UNITY_EDITOR && !USE_SUBSCENE_EDITORBUNDLES
-            EntityManager.AddComponentData(sceneEntity, new ResolvedSceneHash { ArtifactHash = artifactHash });
-
-            UnityEditor.Experimental.AssetDatabaseExperimental.GetArtifactPaths(artifactHash, out var paths);
-
-            var sceneHeaderPath = EntityScenesPaths.GetLoadPathFromArtifactPaths(paths, EntityScenesPaths.PathType.EntitiesHeader);
-#else
-            var sceneHeaderPath = EntityScenesPaths.GetLoadPath(scene.SceneGUID, EntityScenesPaths.PathType.EntitiesHeader, -1);
-#endif
-            
-#if UNITY_ANDROID && !UNITY_EDITOR
-            var uwrFile = new UnityWebRequest(sceneHeaderPath);
-            uwrFile.downloadHandler = new DownloadHandlerBuffer();
-            uwrFile.SendWebRequest();
-            while(!uwrFile.isDone) {}
-
-            if (uwrFile.isNetworkError || uwrFile.isHttpError)
+            if (ResolveSceneSectionUtility.ResolveSceneSections(EntityManager, sceneEntity, scene.SceneGUID, requestSceneLoaded, artifactHash))
             {
-                Debug.LogError($"Loading Entity Scene failed because the entity header file could not be found: {scene.SceneGUID}\nNOTE: In order to load SubScenes in the player you have to use the new BuildConfiguration asset based workflow to build & run your player.\n{sceneHeaderPath}");
-                return;
+                LogResolving("ResolveScene (success)", scene.SceneGUID);
+                Assertions.Assert.IsTrue(EntityManager.GetEntityQueryMask(m_ResolvedScenes).Matches(sceneEntity));
             }
-            
-            if (!BlobAssetReference<SceneMetaData>.TryRead(uwrFile.downloadHandler.data, SceneMetaDataSerializeUtility.CurrentFileFormatVersion, out var sceneMetaDataRef))
-            {
-                Debug.LogError("Loading Entity Scene failed because the entity header file was an old version: " + scene.SceneGUID);
-                return;
-            }
-#else
-            if (!File.Exists(sceneHeaderPath))
-            {
-                #if UNITY_EDITOR
-                Debug.LogError($"Loading Entity Scene failed because the entity header file could not be found: {scene.SceneGUID}\n{sceneHeaderPath}");
-                #else
-                Debug.LogError($"Loading Entity Scene failed because the entity header file could not be found: {scene.SceneGUID}\nNOTE: In order to load SubScenes in the player you have to use the new BuildConfiguration asset based workflow to build & run your player.\n{sceneHeaderPath}");
-                #endif
-                return;
-            }
-            
-            if (!BlobAssetReference<SceneMetaData>.TryRead(sceneHeaderPath, SceneMetaDataSerializeUtility.CurrentFileFormatVersion, out var sceneMetaDataRef))
-            {
-                Debug.LogError("Loading Entity Scene failed because the entity header file was an old version: " + scene.SceneGUID);
-                return;
-            }
-#endif
-
-            LogResolving("ResolveScene (success)", scene.SceneGUID);
-
-            ref var sceneMetaData = ref sceneMetaDataRef.Value;
-
-#if UNITY_EDITOR
-            var sceneName = sceneMetaData.SceneName.ToString();
-            EntityManager.SetName(sceneEntity, $"Scene: {sceneName}");
-#endif
-
-            var loadSections = !requestSceneLoaded.LoadFlags.HasFlag(SceneLoadFlags.DisableAutoLoad);
-
-            for (int i = 0; i != sceneMetaData.Sections.Length; i++)
-            {
-                var sectionEntity = EntityManager.CreateEntity();
-                var sectionIndex = sceneMetaData.Sections[i].SubSectionIndex;
-#if UNITY_EDITOR
-                EntityManager.SetName(sectionEntity, $"SceneSection: {sceneName} ({sectionIndex})");
-#endif
-
-                if (loadSections)
-                {
-                    EntityManager.AddComponentData(sectionEntity, requestSceneLoaded);
-                }
-
-                EntityManager.AddComponentData(sectionEntity, sceneMetaData.Sections[i]);
-                EntityManager.AddComponentData(sectionEntity, new SceneBoundingVolume { Value = sceneMetaData.Sections[i].BoundingVolume });
-
-                var sectionPath = new ResolvedSectionPath();
-#if !UNITY_EDITOR || USE_SUBSCENE_EDITORBUNDLES
-                var hybridPath = EntityScenesPaths.GetLoadPath(scene.SceneGUID, EntityScenesPaths.PathType.EntitiesUnityObjectReferences, sectionIndex);
-                var scenePath = EntityScenesPaths.GetLoadPath(scene.SceneGUID, EntityScenesPaths.PathType.EntitiesBinary, sectionIndex);
-#else
-                var scenePath = EntityScenesPaths.GetLoadPathFromArtifactPaths(paths, EntityScenesPaths.PathType.EntitiesBinary, sectionIndex);
-                var hybridPath = EntityScenesPaths.GetLoadPathFromArtifactPaths(paths, EntityScenesPaths.PathType.EntitiesUnityObjectReferences, sectionIndex);
-#endif
-
-                sectionPath.ScenePath.SetString(scenePath);
-                if (hybridPath != null)
-                    sectionPath.HybridPath.SetString(hybridPath);
-
-                EntityManager.AddComponentData(sectionEntity, sectionPath);
-
-#if UNITY_EDITOR
-                if (EntityManager.HasComponent<SubScene>(sceneEntity))
-                    EntityManager.AddComponentObject(sectionEntity, EntityManager.GetComponentObject<SubScene>(sceneEntity));
-#endif
-
-                var buffer = EntityManager.GetBuffer<ResolvedSectionEntity>(sceneEntity);
-                buffer.Add(new ResolvedSectionEntity { SectionEntity = sectionEntity });
-            }
-            sceneMetaDataRef.Dispose();
-            Assertions.Assert.IsTrue(EntityManager.GetEntityQueryMask(m_ResolvedScenes).Matches(sceneEntity));
+            else
+                LogResolving("ResolveScene (failed)", scene.SceneGUID);
         }
 
         //@TODO: What happens if we change source assets between queuing a request for the first time and it being resolved?
@@ -219,8 +133,7 @@ namespace Unity.Scenes
         {
             //TODO: How can we disable systems in specific builds?
 #if !UNITY_EDITOR
-            var liveLinkEnabled = World.GetExistingSystem<LiveLinkRuntimeSystemGroup>()?.Enabled ?? false;
-            Enabled = !liveLinkEnabled;
+            Enabled = !LiveLinkUtility.LiveLinkEnabled;
             if (!Enabled)
                 return;
 #else
@@ -233,7 +146,7 @@ namespace Unity.Scenes
 #if UNITY_EDITOR && !USE_SUBSCENE_EDITORBUNDLES
             Entities.With(m_ImportingScenes).ForEach((Entity sceneEntity, ref SceneReference scene, ref RequestSceneLoaded requestSceneLoaded) =>
             {
-                var hash = EntityScenesPaths.GetSubSceneArtifactHash(scene.SceneGUID, buildConfigurationGUID, UnityEditor.Experimental.AssetDatabaseExperimental.ImportSyncMode.Poll);
+                var hash = EntityScenesPaths.GetSubSceneArtifactHash(scene.SceneGUID, buildConfigurationGUID, ImportMode.NoImport);
                 if (hash.IsValid)
                 {
                     LogResolving("Polling Importing (completed)", scene.SceneGUID);
@@ -243,7 +156,6 @@ namespace Unity.Scenes
                 {
                     LogResolving("Polling Importing (not complete)", scene.SceneGUID);
                 }
-
             });
 #endif
 
@@ -256,17 +168,17 @@ namespace Unity.Scenes
             Entities.With(m_ScenesToRequest).ForEach((Entity sceneEntity, ref SceneReference scene, ref RequestSceneLoaded requestSceneLoaded) =>
             {
 #if UNITY_EDITOR && !USE_SUBSCENE_EDITORBUNDLES
-                 var blocking = (requestSceneLoaded.LoadFlags & SceneLoadFlags.BlockOnImport) != 0;
-                 var importMode = blocking ? UnityEditor.Experimental.AssetDatabaseExperimental.ImportSyncMode.Block : UnityEditor.Experimental.AssetDatabaseExperimental.ImportSyncMode.Queue;
+                var blocking = (requestSceneLoaded.LoadFlags & SceneLoadFlags.BlockOnImport) != 0;
+                var importMode = blocking ? ImportMode.Synchronous : ImportMode.Asynchronous;
 
-                 var hash = EntityScenesPaths.GetSubSceneArtifactHash(scene.SceneGUID, buildConfigurationGUID, importMode);
-                 if (hash.IsValid)
-                 {
-                     LogResolving(blocking ? "Blocking import (completed)" : "Queue not yet requested (completed)", scene.SceneGUID);
-                     ResolveScene(sceneEntity, ref scene, requestSceneLoaded, hash);
-                 }
-                 else
-                     LogResolving(blocking ? "Blocking import (failed)" : "Queue not yet requested (not complete)", scene.SceneGUID);
+                var hash = EntityScenesPaths.GetSubSceneArtifactHash(scene.SceneGUID, buildConfigurationGUID, importMode);
+                if (hash.IsValid)
+                {
+                    LogResolving(blocking ? "Blocking import (completed)" : "Queue not yet requested (completed)", scene.SceneGUID);
+                    ResolveScene(sceneEntity, ref scene, requestSceneLoaded, hash);
+                }
+                else
+                    LogResolving(blocking ? "Blocking import (failed)" : "Queue not yet requested (not complete)", scene.SceneGUID);
 #else
                 ResolveScene(sceneEntity, ref scene, requestSceneLoaded, new Hash128());
 #endif
@@ -303,5 +215,4 @@ namespace Unity.Scenes
             m_ChangedScenes.Dispose();
         }
     }
-
 }
