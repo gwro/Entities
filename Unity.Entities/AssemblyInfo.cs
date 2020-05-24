@@ -1,4 +1,4 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Unity.Entities.Editor")]
 [assembly: InternalsVisibleTo("Unity.Entities.Editor.Tests")]
@@ -21,3 +21,4 @@
 [assembly: InternalsVisibleTo("Unity.Entities.Determinism")]
 [assembly: InternalsVisibleTo("Unity.DataFlowGraph")]
 [assembly: InternalsVisibleTo("Unity.DataFlowGraph.Tests")]
+[assembly: InternalsVisibleTo("Unity.Transforms.Hybrid")]
