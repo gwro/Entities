@@ -4,7 +4,7 @@ using Unity.Collections.LowLevel.Unsafe;
 
 namespace Unity.Entities
 {
-    //[NativeContainer]
+    [NativeContainer]
     public unsafe struct UntypedBufferAccessor
     {
         [NativeDisableUnsafePtrRestriction]
