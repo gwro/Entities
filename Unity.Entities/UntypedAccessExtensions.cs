@@ -182,10 +182,11 @@ namespace Unity.Entities
         public static unsafe ArchetypeChunkBufferDataTypeDynamic GetArchetypeChunkBufferTypeDynamic(this EntityManager entityManager, ComponentType componentType)
         {
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
+            var access = entityManager.GetCheckedEntityDataAccess();
             var typeIndex = componentType.TypeIndex;
             return new ArchetypeChunkBufferDataTypeDynamic(
-                entityManager.SafetyHandles->GetSafetyHandle(typeIndex, componentType.AccessModeType == ComponentType.AccessMode.ReadOnly),
-                entityManager.SafetyHandles->GetBufferSafetyHandle(typeIndex),
+                access->DependencyManager->Safety.GetSafetyHandleForArchetypeChunkBufferType(componentType.TypeIndex, componentType.AccessModeType == ComponentType.AccessMode.ReadOnly),
+                access->DependencyManager->Safety.GetBufferHandleForArchetypeChunkBufferType(typeIndex),
                 componentType, entityManager.GlobalSystemVersion);
 #else
             return new ArchetypeChunkBufferDataTypeDynamic(componentType, entityManager.GlobalSystemVersion);
