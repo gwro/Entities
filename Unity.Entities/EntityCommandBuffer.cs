@@ -548,14 +548,14 @@ namespace Unity.Entities
 
             // NOTE: This has to be sizeof not TypeManager.SizeInChunk since we use UnsafeUtility.CopyStructureToPtr
             //       even on zero size components.
-            var sizeNeeded = EntityCommandBufferData.Align(sizeof(EntityComponentCommand) + typeSize, 8);
+            var sizeNeeded = Align(sizeof(EntityComponentCommand) + typeSize, 8);
 
             ResetCommandBatching(chain);
             var cmd = (EntityComponentCommand*)Reserve(chain, jobIndex, sizeNeeded);
 
             cmd->Header.Header.CommandType = (int)op;
             cmd->Header.Header.TotalSize = sizeNeeded;
-            cmd->Header.Header.SortIndex = chain->m_LastSortIndex;
+            cmd->Header.Header.SortKey = chain->m_LastSortKey;
             cmd->Header.Entity = e;
             cmd->ComponentTypeIndex = cType.TypeIndex;
             cmd->ComponentSize = typeSize;
