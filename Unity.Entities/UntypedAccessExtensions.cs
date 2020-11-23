@@ -261,5 +261,22 @@ namespace Unity.Entities
             return new UntypedBufferAccessor(ptr + batchStartOffset, length, stride, elementSize, alignment, internalCapacity);
 #endif
         }
+        
+        // based on ArchetypeChunk::Has<BufferTypeHandle>()
+        public static unsafe bool Has(this ref ArchetypeChunk chunk, DynamicBufferTypeHandle bufferTypeHandle)
+        {
+            var typeIndexInArchetype = ChunkDataUtility.GetIndexInTypeArray(chunk.m_Chunk->Archetype, bufferTypeHandle.m_TypeIndex);
+            return (typeIndexInArchetype != -1);
+        }
+        
+        public static int GetTypeIndex(this ref DynamicComponentTypeHandle componentTypeHandle)
+        {
+            return componentTypeHandle.m_TypeIndex;
+        }
+        
+        public static int GetTypeIndex(this ref DynamicBufferTypeHandle bufferComponentType)
+        {
+            return bufferComponentType.m_TypeIndex;
+        }
     }
 }
