@@ -172,7 +172,7 @@ namespace Unity.Entities
         {
             CheckZeroSizedComponentData(chunkComponentType);
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
-            AtomicSafetyHandle.CheckReadAndThrow(chunkComponentType.m_Safety);
+            AtomicSafetyHandle.CheckReadAndThrow(chunkComponentType.m_Safety0);
 #endif
             var chunk = archetypeChunk.m_Chunk;
             var archetype = chunk->Archetype;
@@ -182,10 +182,14 @@ namespace Unity.Entities
             {
                 var emptyResult = NativeArrayUnsafeUtility.ConvertExistingDataToNativeArray<byte>(null, 0, 0);
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
-                NativeArrayUnsafeUtility.SetAtomicSafetyHandle(ref emptyResult, chunkComponentType.m_Safety);
+                NativeArrayUnsafeUtility.SetAtomicSafetyHandle(ref emptyResult, chunkComponentType.m_Safety0);
 #endif
                 return emptyResult;
             }
+#if ENABLE_UNITY_COLLECTIONS_CHECKS
+            if (archetype->Types[typeIndexInArchetype].IsBuffer)
+                throw new ArgumentException($"ArchetypeChunk.GetDynamicComponentDataArrayReinterpret cannot be called for IBufferElementData {TypeManager.GetType(chunkComponentType.m_TypeIndex)}");
+#endif
             
             var typeSize = archetype->SizeOfs[typeIndexInArchetype];
             var length = archetypeChunk.Count;
@@ -200,7 +204,7 @@ namespace Unity.Entities
             var batchStartOffset = archetypeChunk.m_BatchStartEntityIndex * archetype->SizeOfs[typeIndexInArchetype];
             var result = NativeArrayUnsafeUtility.ConvertExistingDataToNativeArray<byte>(ptr + batchStartOffset, byteLen, Allocator.None);
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
-            NativeArrayUnsafeUtility.SetAtomicSafetyHandle(ref result, chunkComponentType.m_Safety);
+            NativeArrayUnsafeUtility.SetAtomicSafetyHandle(ref result, chunkComponentType.m_Safety0);
 #endif
             return result;
         }
@@ -218,11 +222,18 @@ namespace Unity.Entities
             return new DynamicBufferTypeHandle(componentType, entityManager.GlobalSystemVersion);
 #endif
         }
-
-        public static DynamicBufferTypeHandle GetDynamicBufferTypeHandle(this ComponentSystemBase system, ComponentType componentType)
+        
+        // based on SystemState::GetDynamicComponentTypeHandle
+        public static DynamicBufferTypeHandle GetDynamicBufferTypeHandle(this ref SystemState systemState, ComponentType componentType)
         {
-            system.AddReaderWriter(componentType);
-            return system.EntityManager.GetDynamicBufferTypeHandle(componentType);
+            systemState.AddReaderWriter(componentType);
+            return systemState.EntityManager.GetDynamicBufferTypeHandle(componentType);
+        }
+        
+        // based on ComponentSystemBase::GetDynamicComponentTypeHandle
+        public static unsafe DynamicBufferTypeHandle GetDynamicBufferTypeHandle(this ComponentSystemBase system, ComponentType componentType)
+        {
+            return system.CheckedState()->GetDynamicBufferTypeHandle(componentType);
         }
         
         // based on ArchetypeChunk::GetBufferAccessor
