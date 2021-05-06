@@ -598,20 +598,20 @@ namespace Unity.Entities
             }
         }
         
-        internal void AddEntityComponentCommand(EntityCommandBufferChain* chain, int jobIndex, ECBCommand op, Entity e, ComponentType cType, int typeSize, NativeArray<byte> byteArray)
+        internal void AddEntityComponentCommand(EntityCommandBufferChain* chain, int sortKey, ECBCommand op, Entity e, ComponentType cType, int typeSize, NativeArray<byte> byteArray)
         {
             if (cType.IsZeroSized)
             {
-                AddEntityComponentTypeCommand(chain, jobIndex, op, e, cType);
+                AddEntityComponentTypeCommand(chain, sortKey, op, e, cType);
                 return;
             }
 
             // NOTE: This has to be sizeof not TypeManager.SizeInChunk since we use UnsafeUtility.CopyStructureToPtr
             //       even on zero size components.
-            var sizeNeeded = Align(sizeof(EntityComponentCommand) + typeSize, 8);
+            var sizeNeeded = Align(sizeof(EntityComponentCommand) + typeSize, ALIGN_64_BIT);
 
             ResetCommandBatching(chain);
-            var cmd = (EntityComponentCommand*)Reserve(chain, jobIndex, sizeNeeded);
+            var cmd = (EntityComponentCommand*)Reserve(chain, sortKey, sizeNeeded);
 
             cmd->Header.Header.CommandType = (int)op;
             cmd->Header.Header.TotalSize = sizeNeeded;
