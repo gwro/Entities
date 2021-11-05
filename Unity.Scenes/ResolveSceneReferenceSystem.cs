@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Collections.LowLevel.Unsafe;
 using Hash128 = Unity.Entities.Hash128;
 
 namespace Unity.Scenes
